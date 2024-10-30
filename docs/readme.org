@@ -1,0 +1,46 @@
+* rsemiコマンド作成・機能作成 rsemi
+** 機能 
+ - rsemiフォルダのmaterial, commentに移動 : cd_material
+      
+ - rsemi資料テンプレート作成(orgファイル) : cd_comment
+   
+ - rsemi資料をhtmlからpdfへ自動出力 : output_pdf (htmlファイル)
+   - material/日付-ニックネーム.pdfに出力
+     
+ - googleドキュメントから合意事項とコメントを取得してファイル出力 : get_agree
+   - comment/ニックネーム.orgに出力
+
+ - 特定の人のpdfを開く : open_pdf (nickname)
+   - オプション
+     - --date      
+     
+ - githubへの自動プルリク : submit_pdf
+   - 以下の流れを自動化
+     - ここで更新ファイルの中身のテストをする
+     - git add --all
+     - git commit -m "add material/日付-ニックネーム.pdf"
+     - git push
+     - gh プルリク
+   
+** ファイル
+ - rsemi
+   - main.py
+   - config.py
+   - scripts
+     - cd_material.sh
+     - cd_comment.sh
+     - create_template.sh
+     - get_agree.py
+     - open_pdf.sh
+     - open_pdf.sh
+   - docs
+     - README.org     
+   - requirement.txt
+   - .gitignore
+   - rsemi
+     
+  
+   
+
+   
+ 
