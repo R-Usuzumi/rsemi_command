@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 config_file="$HOME/.rsemi_config"
+shell_config="$HOME/.zshrc"
 
 # インストール済みの処理
 if [ -f "$config_file" ]; then
@@ -14,7 +15,7 @@ if [ -f "$config_file" ]; then
 else   
     read "nickname?nickname: "
     read "rsemi_path?rsemi_path: "
-
+    rsemi_path="$HOME/${rsemi_path#*/}"
 
     echo "You entered:"
     echo "nickname: $nickname"
@@ -52,6 +53,22 @@ for file in ./bin/*; do
     ln -s "$exec_file" "$link_path"
     echo "Created symlink: $exec_file -> $simlink_dir/$base_name"
 done
-    
-source "$config_file"
+
+
+# cd_commentエイリアスが存在しない場合に追加
+if ! grep -q "alias cd_comment='source cd_comment'" "$shell_config"; then
+    echo "alias cd_comment='source cd_comment'" >> "$shell_config"
+    echo "Added alias 'cd_comment' to $shell_config."
+else
+    echo "Alias 'cd_comment' is already defined in $shell_config."
+fi
+
+# cd_materialエイリアスが存在しない場合に追加
+if ! grep -q "alias cd_material='source cd_material'" "$shell_config"; then
+    echo "alias cd_material='source cd_material'" >> "$shell_config"
+    echo "Added alias 'cd_material' to $shell_config."
+else
+    echo "Alias 'cd_material' is already defined in $shell_config."
+fi
+  
 echo "installation complete."
