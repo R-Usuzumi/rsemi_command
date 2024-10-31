@@ -19,8 +19,8 @@ if [[ "$html_file" != *.html && "$html_file" != *.htm ]]; then
 fi
 
 file_name="${html_file##*/}"
-echo "$file_name"
 base_name="${file_name%.*}"
-echo "$base_name"
+pdf_file="$RSEMI_PATH/material/$base_name.pdf"
 
-google-chrome --headless --print-to-pdf="$RSEMI_PATH/material/$base_name.pdf" "$html_file"
+google-chrome --headless --print-to-pdf="$pdf_file" "$html_file"
+open "$pdf_file"

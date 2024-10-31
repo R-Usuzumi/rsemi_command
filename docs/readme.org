@@ -1,26 +1,118 @@
-* rsemiコマンド
-** 機能 
-*** material
+* インストール方法
+** インストール手順
+   - gh repo clone R-Usuzumi/rsemi_command
+   - rsemi_commnadに移動
+   - ./install.shを実行
+     - nickname: 自分のニックネームを入力
+     - rsemi_path: 自分のpc内の2024-r-semiまでのパス
+       - ~/からのパスあるいはルートからのパスを入力
+       - *ここしくじったら何もできません!!!* (あとで再設定はできます)
+   - source ~/.zshrc
+   - インストール完了．rget以外がすぐに使えるようになります
+
+** rgetコマンドを使うためのgoogle cloudの設定
+*** 注意
+   - googleのapiを使用するためにgoogle cloud側で事前に設定するべきことを設定します
+   - この設定をしなくてもrget以外のコマンドは使えます
+   
+*** 設定手順
+**** プロジェクト作成
+   - [[https://console.cloud.google.com/welcome?_gl=1*1ndh4j4*_up*MQ..&gclid=Cj0KCQjw1Yy5BhD-ARIsAI0RbXY0XT4NyI0FjF3U4RtVXOfqwMwe1HnbrlpONSobjcUUWs5191GAWk0aArzpEALw_wcB&gclsrc=aw.ds&project=rsmi-440216][Google cloud console]] にアクセスします，おそらく 以下の画面になる（初期画面）
+      #+ATTR_HTML: :width 800
+      file:///Users/usuryuryu/rsemi_command/docs/images/d0.png     
+   - 左上の「プロジェクト選択」をクリック
+      #+ATTR_HTML: :width 800
+      file:///Users/usuryuryu/rsemi_command/docs/images/d1.png
+   - 右上の「新しいプロジェクト」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d2.png
+   - プロジェクト名を「rsemi-command」として「作成」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d3.png
+   - 作成後にrsemi-commandプロジェクトが画像のように選択されていることを確認
+     - もし選択されていない場合は，プロジェクト選択から選択
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d4.png
+     
+**** APIの有効化     
+   - 初期画面の左上のメニューバーから「APIとサービス」 > 「ライブラリ」を選択すると，下の画面になる
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d5.png
+   - 真ん中の検索バーに google docs apiと打つと以下の画面になるので，「Google Docs APi」を選択
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d6.png
+   - 「有効にする」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d7.png
+   - 同様の手順で検索バーにgoogle sheets apiと打つと以下の画面になるので，「Google Sheets API」を選択して，「有効にする」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d8.png
+     
+**** 認証情報の設定
+   - 初期画面の左上のメニューバーから「APIとサービス」 > 「OAuth同意画面」を選択すると下の画面になる
+     - User Typeとして「外部」を選んで作成をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d9.png
+   - 次に以下の画面で，アプリ名は「rsemi-command」，ユーザサポートメールは自分のgoogleのメアドを入力
+     - 下にスクロールした先にあるデベロッパーの連絡先情報にも同様に自分のメアドを入力して，「保存して次へ」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d10.png
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d11.png
+   - 以下のスコープの設定は何も設定しなくていいです. スクロールして「保存して次へ」をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d12.png
+   - 以下の画面でテストユーザーの下にある +ADD USERS をクリックして，自分のgoogleのメアドを入力して，追加をクリック. 「保存して次へ」をクリック
+     - 「不適格なアカウントは追加されません」とでても，一旦無視してください
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d13.png
+   - 初期画面に戻って左上のメニューバーから「APIとサービス」 > 「認証情報」を選択すると，以下の画面になります
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d15.png
+   - 「認証情報の作成」をクリックし，「OAuth クライアントID」を選択
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d16.png
+   - 以下の画面でアプリケーションの種類で「デスクトップアプリ」，名前を「rsemi-command」を入力し，作成をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d18.png
+   - 下の画面のようにOAuth 2.0クライアントIDに行が追加されるので，一番右のダウンロードボタンをクリックして，JSONをダウンロード
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d19.png
+
+   - ダウンロードされたclient_secret_...みたいなjson形式のファイル名を「credentials.json」に変更
+   - コマンド自体のインストールをしていたら，ホームディレクトリにrsemi_tokenというフォルダが作成されるので，credentials.jsonをそこに移動
+   - ターミナルで以下のコマンドを実行するとブラウザが立ち上がり，googleアカウント選択の後以下の画面が出てくる. 続行をクリック
+     - ここで違うの出てきたら，どこかでミスしています
+     #+BEGIN_SRC shell
+     rget 2024/10/15 --pos copy
+     #+END_SRC
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d20.png
+   - 以下の画面のようにすべてを選択して，続行をクリック
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d21.png
+   - ターミナルに戻って，以下のようにターミナル上に合意事項やコメントが出ていたら，成功です
+     #+ATTR_HTML: :width 800
+     file:///Users/usuryuryu/rsemi_command/docs/images/d22.png
+     
+* コマンド
+** *material*
  - 概要
    - 2024-r-semiのmaterialフォルダに移動
 
  - 引数
    - なし
-
- - 使用例
-      
-*** comment
+          
+** *comment*
  - 概要
    - 2024-r-semiのcommentフォルダ移動
      
  - 引数
    - なし
 
- - 使用例
-   
-*** rget
+** *rget*
  - 概要
-   - google documentから合意事項・コメントを自動取得，自動出力
+   - google documentから指定した日付の自分の合意事項・コメントを自動で取得し，自分のcomment/nickname.orgに追記できます
 
  - 引数
    1. <date> (必須)
@@ -35,53 +127,112 @@
 	- クリップボードにコピー		
 
  - 使用例
+   - comment/nickname.orgの一番上に追記したい場合
+   #+BEGIN_SRC shell
+     rget 2024/10/29 --pos top
+   #+END_SRC
+
+   - comment/nickname.orgの一番下に追記したい場合
+   #+BEGIN_SRC shell
+     rget 2024/10/29 --pos bottom
+   #+END_SRC
+
+   - クリップボードにコピーした場合
+   #+BEGIN_SRC shell
+     rget 2024/10/29 --pos copy
+   #+END_SRC
         
-*** rout
+** *rout*
  - 概要
-   - 指定したhtmlをmaterial内に出力
+   - 指定したhtmlをpdfに変換し，material/フォルダ内に出力
 
  - 引数
    1. <html_file> (必須)
       - orgから出力したhtmlファイルを指定
 
- - 使用例     
+ - 使用例
+   #+BEGIN_SRC shell
+     rout 1029-ryuto.html
+   #+END_SRC   
 
-*** ropen
+** *ropen*
  - 概要
-   - 指定した人，日付の資料を開く
+   - 指定した人，日付のpdf資料を開けます
      
  - 引数
    1. <nickname> (必須)
-      - ニックネームを指定. 第一引数だけで実行すると，最新の資料が開く
+      - ニックネームを指定. 第一引数だけで実行すると，その人の最新の資料が開く
 	
    2. <date> (オプション)
       - 4桁の日付MMDD
       - "t"の文字列 - todayの略
 	
  - 使用例
-   
-*** rsubmit
+   - ニックネーム指定のみの場合
+   #+BEGIN_SRC shell
+     ropen ryuto
+   #+END_SRC      
+
+   - ニックネームと1029の場合
+   #+BEGIN_SRC shell
+     ropen ryuto 1029
+   #+END_SRC
+
+   - ニックネームとtの場合
+   #+BEGIN_SRC shell
+     ropen ryuto t
+   #+END_SRC         
+ 
+** *rsubmit*
  - 概要
-   - 資料を置いた後，変更ファイル確認 -> 自動プルリク -> githubページ自動遷移
+   - 資料を置いた後，以下の流れを自動化します
+     - 変更されたファイル，追加されたファイル確認
+     - add
+     - commit
+     - push
+     - pull request
+     - pull requestの確認のためのgithubに自動遷移
      
  - 引数
    - なし
 
- - 使用例
-
-*** rconfig
+** *rconfig*
  - 概要
-   - インストール時のNICKNAMEとRSEMI_PATHの設定変更や確認
+   - インストール時のconfig変数(NICKNAMEとRSEMI_PATH)の設定変更や確認ができます
 
  - 引数
    1. <show> (必須)
       
    1. <get> (必須)
       2. <key> (必須)
-	 - 環境変数のキー (NICKNAME, RSEMI_PATH)
+	 - config変数のキー (NICKNAME, RSEMI_PATH)
 	 
    1. <set> (必須)
       2. <key> (必須)
-	 - 環境変数のキー 
+	 - config変数のキー 
       3. <value> (必須)
-	 - 環境変数のキーに対応する値
+	 - config変数のキーに対応する値
+	   
+ - 使用例
+   - showする場合
+     - config変数(NICKNAMEとRSEMI_PATH)の値を確認できます
+   #+BEGIN_SRC shell
+     rconfig show
+   #+END_SRC
+
+   - getする場合
+     - config変数を指定して，設定された値を確認できます
+   #+BEGIN_SRC shell
+     rconfig get NICKNAME(RSEMI_PATH) 
+   #+END_SRC
+
+   - setする場合
+     - config変数をキー・値の形で再設定できます
+   #+BEGIN_SRC shell
+     rconfig set NICKNAME ryuto
+   #+END_SRC            
+
+* アンインストール方法
+ - ./uninstall.sh実行
+ - source ~/.zshrc
+ - アンインストール完了
