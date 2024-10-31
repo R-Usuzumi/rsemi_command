@@ -25,14 +25,14 @@ for file in ./bin/*; do
 done
 
 # エイリアス削除
-if grep -q "alias cd_comment='source cd_comment'" "$shell_config"; then
-    sed -i '' "/alias cd_comment='source cd_comment'/d" "$shell_config"
-    echo "Removed alias 'cd_comment' from $shell_config"
+if grep -q "alias comment='source comment'" "$shell_config"; then
+    sed -i '' "/alias comment='source comment'/d" "$shell_config"
+    echo "Removed alias 'comment' from $shell_config"
 fi
 
-if grep -q "alias cd_material='source cd_material'" "$shell_config"; then
-    sed -i '' "/alias cd_material='source cd_material'/d" "$shell_config"
-    echo "Removed alias 'cd_material' from $shell_config"
+if grep -q "alias material='source material'" "$shell_config"; then
+    sed -i '' "/alias material='source material'/d" "$shell_config"
+    echo "Removed alias 'material' from $shell_config"
 fi
 
 echo "Alias removal complete."

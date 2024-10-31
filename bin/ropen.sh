@@ -9,9 +9,7 @@ else
     exit 1
 fi
 
-
 material_path="$RSEMI_PATH/material"
-
 if [ $# -eq 0 ]; then
     echo "Usage: $0 [nickname] [date]"
     echo "Arguments:"
@@ -20,24 +18,32 @@ if [ $# -eq 0 ]; then
     exit 0
 fi
 
+# nicknameだけの指定(最新の渡す)
 if [ $# -eq 1 ]; then
     nickname="$1"
-    target_file="$material_path/$(ls -1 *.pdf | grep -E "^[0-9]{4}-$nickname\.pdf$" | sort -r | head -n 1)"
+    target_file="$material_path/$(ls $material_path/ | grep -E "^[0-9]{4}-$nickname.pdf" | sort -r | head -n 1)"
+    echo "open ${target_file##*/}"
     open "$target_file"
+    exit 0
 fi
 
+# nickname dateを指定
 if [ $# -eq 2 ]; then
     nickname="$1"   
     date="$2"
-    
+
+    # dateがtの時(今日の日にちの渡す)
     if [ "$2" = "t" ]; then
 	today=$(date +%m%d)
 	target_file="$material_path/$today-$nickname.pdf"
+	echo "open ${target_file##*/}"
 	open "$target_file"
 	exit 0
-	
+
+    # dateが4桁の日付の場合
     else
 	target_file="$material_path/$date-$nickname.pdf"
+	echo "open ${target_file##*/}"
 	open "$target_file"
 	exit 0
     fi

@@ -26,7 +26,6 @@ function set_config() {
 # 第一引数に set get showが来たときの処理
 case "$1" in
     set)
-        # 値を設定する
         if [ -n "$2" ] && [ -n "$3" ]; then
             set_config "$2" "$3"
         else
@@ -34,7 +33,6 @@ case "$1" in
         fi
         ;;
     get)
-        # 値を取得する
         if [ -n "$2" ]; then
             value=$(get_config "$2")
             if [ -n "$value" ]; then

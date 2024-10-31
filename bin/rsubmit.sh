@@ -12,7 +12,7 @@ fi
 RED='\033[0;31m'
 NC='\033[0m'
 
-cd_material
+cd "$RSEMI_PATH"
 tracked_files=($(git status --porcelain | grep '^ M' | awk '{print $2}'))
 untracked_files=($(git status --porcelain | grep '^??' | awk '{print $2}'))
 
