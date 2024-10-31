@@ -55,7 +55,7 @@ for file in ./bin/*; do
 done
 
 
-# cd_commentエイリアスが存在しない場合に追加
+# commentエイリアスが存在しない場合に追加
 if ! grep -q "alias comment='source comment'" "$shell_config"; then
     echo "alias comment='source comment'" >> "$shell_config"
     echo "Added alias 'comment' to $shell_config."
@@ -63,12 +63,20 @@ else
     echo "Alias 'comment' is already defined in $shell_config."
 fi
 
-# cd_materialエイリアスが存在しない場合に追加
+# materialエイリアスが存在しない場合に追加
 if ! grep -q "alias material='source material'" "$shell_config"; then
     echo "alias material='source material'" >> "$shell_config"
     echo "Added alias 'material' to $shell_config."
 else
     echo "Alias 'material' is already defined in $shell_config."
 fi
-  
+
+# google-chromeのエイリアス
+if ! grep -q 'google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"' "$shell_config"; then
+    echo 'alias google-chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"' >> "$shell_config"
+    echo "Added alias 'google-chrome' to $shell_config."
+else
+    echo "Alias 'google-chrome' is already defined in $shell_config."
+fi
+
 echo "installation complete."
