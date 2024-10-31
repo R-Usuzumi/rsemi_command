@@ -262,6 +262,8 @@ def main(spreadsheet_url, target_date, pos):
 
 
 if __name__ == "__main__":
+
+    # スプレッドシートurl!!!!!!!!!!!!!!!!!!!
     spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1TKRBC-U6ycJV4jtHz53jQ4oW_xgHOFM6we115cQk7nI/edit?gid=147889766#gid=147889766'
 
     # 引数設定

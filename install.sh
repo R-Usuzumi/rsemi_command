@@ -39,6 +39,8 @@ fi
 simlink_dir="$HOME/bin"
 mkdir -p "$simlink_dir"
 
+pip install -r requirements.txt
+
 # シンボリックリンク貼る
 for file in ./bin/*; do
     file_name="${file##*/}"
