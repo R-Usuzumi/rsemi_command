@@ -9,7 +9,7 @@ if [ -f "$config_file" ]; then
     echo "Using existing settings."   
     source "$config_file"
     echo "nickname: $NICKNAME"
-    echo "rsemi_path: $RSEMI"
+    echo "rsemi_path: $RSEMI_PATH"
 
 # まだインストールしてないとき   
 else   
@@ -56,19 +56,19 @@ done
 
 
 # cd_commentエイリアスが存在しない場合に追加
-if ! grep -q "alias cd_comment='source cd_comment'" "$shell_config"; then
-    echo "alias cd_comment='source cd_comment'" >> "$shell_config"
-    echo "Added alias 'cd_comment' to $shell_config."
+if ! grep -q "alias comment='source comment'" "$shell_config"; then
+    echo "alias comment='source comment'" >> "$shell_config"
+    echo "Added alias 'comment' to $shell_config."
 else
-    echo "Alias 'cd_comment' is already defined in $shell_config."
+    echo "Alias 'comment' is already defined in $shell_config."
 fi
 
 # cd_materialエイリアスが存在しない場合に追加
-if ! grep -q "alias cd_material='source cd_material'" "$shell_config"; then
-    echo "alias cd_material='source cd_material'" >> "$shell_config"
-    echo "Added alias 'cd_material' to $shell_config."
+if ! grep -q "alias material='source material'" "$shell_config"; then
+    echo "alias material='source material'" >> "$shell_config"
+    echo "Added alias 'material' to $shell_config."
 else
-    echo "Alias 'cd_material' is already defined in $shell_config."
+    echo "Alias 'material' is already defined in $shell_config."
 fi
   
 echo "installation complete."

@@ -1,46 +1,87 @@
-* rsemiコマンド作成・機能作成 rsemi
+* rsemiコマンド
 ** 機能 
- - rsemiフォルダのmaterial, commentに移動 : cd_material
+*** material
+ - 概要
+   - 2024-r-semiのmaterialフォルダに移動
+
+ - 引数
+   - なし
+
+ - 使用例
       
- - rsemi資料テンプレート作成(orgファイル) : cd_comment
-   
- - rsemi資料をhtmlからpdfへ自動出力 : output_pdf (htmlファイル)
-   - material/日付-ニックネーム.pdfに出力
+*** comment
+ - 概要
+   - 2024-r-semiのcommentフォルダ移動
      
- - googleドキュメントから合意事項とコメントを取得してファイル出力 : get_agree
-   - comment/ニックネーム.orgに出力
+ - 引数
+   - なし
 
- - 特定の人のpdfを開く : open_pdf (nickname)
-   - オプション
-     - --date      
-     
- - githubへの自動プルリク : submit_pdf
-   - 以下の流れを自動化
-     - ここで更新ファイルの中身のテストをする
-     - git add --all
-     - git commit -m "add material/日付-ニックネーム.pdf"
-     - git push
-     - gh プルリク
+ - 使用例
    
-** ファイル
- - rsemi
-   - main.py
-   - config.py
-   - scripts
-     - cd_material.sh
-     - cd_comment.sh
-     - create_template.sh
-     - get_agree.py
-     - open_pdf.sh
-     - open_pdf.sh
-   - docs
-     - README.org     
-   - requirement.txt
-   - .gitignore
-   - rsemi
-     
-  
-   
+*** rget
+ - 概要
+   - google documentから合意事項・コメントを自動取得，自動出力
 
+ - 引数
+   1. <date> (必須)
+      - 日付YYYY/MM/DD
+	
+   2. <--pos> (オプション)
+      - top
+	- comment/nickname.orgの一番上に追記
+      - bottom
+	- comment/nickname.orgの一番下に追記
+      - copy
+	- クリップボードにコピー		
+
+ - 使用例
+        
+*** rout
+ - 概要
+   - 指定したhtmlをmaterial内に出力
+
+ - 引数
+   1. <html_file> (必須)
+      - orgから出力したhtmlファイルを指定
+
+ - 使用例     
+
+*** ropen
+ - 概要
+   - 指定した人，日付の資料を開く
+     
+ - 引数
+   1. <nickname> (必須)
+      - ニックネームを指定. 第一引数だけで実行すると，最新の資料が開く
+	
+   2. <date> (オプション)
+      - 4桁の日付MMDD
+      - "t"の文字列 - todayの略
+	
+ - 使用例
    
- 
+*** rsubmit
+ - 概要
+   - 資料を置いた後，変更ファイル確認 -> 自動プルリク -> githubページ自動遷移
+     
+ - 引数
+   - なし
+
+ - 使用例
+
+*** rconfig
+ - 概要
+   - インストール時のNICKNAMEとRSEMI_PATHの設定変更や確認
+
+ - 引数
+   1. <show> (必須)
+      
+   1. <get> (必須)
+      2. <key> (必須)
+	 - 環境変数のキー (NICKNAME, RSEMI_PATH)
+	 
+   1. <set> (必須)
+      2. <key> (必須)
+	 - 環境変数のキー 
+      3. <value> (必須)
+	 - 環境変数のキーに対応する値
