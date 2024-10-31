@@ -5,6 +5,7 @@ import pickle
 import re
 import argparse
 import tempfile
+from pathlib import Path
 from datetime import datetime
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
@@ -36,8 +37,10 @@ SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets.readonly',
     'https://www.googleapis.com/auth/documents.readonly',
 ]
-TOKEN_PATH = os.path.join(os.path.expanduser("~"), 'token.pickle')
-credentials = os.path.join(os.path.expanduser("~"), "credentials.json")
+
+TOKEN_FOLDER = 'rsemi_token'
+TOKEN_PATH = Path.home() / TOKEN_FOLDER / 'token.pickle'
+credentials = Path.home() / TOKEN_FOLDER / "credentials.json"
 
 
 def get_credentials():
@@ -80,7 +83,10 @@ def get_spreadsheet_id(url):
     スプシのurlからスプシid取り出す
     """
     match = re.search(r'/d/([a-zA-Z0-9-_]+)', url)
-    return match.group(1)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Spreadsheet ID not found in the URL.")
 
 
 def get_spreadsheet_data(spreadsheet_id):
@@ -117,7 +123,10 @@ def get_document_id(url):
     ドキュメントのurlからドキュメントid取り出す
     """
     match = re.search(r'/d/([a-zA-Z0-9-_]+)', url)
-    return match.group(1)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Document ID not found in the URL.")
 
 
 def search_agree_comment(doc_id, nickname):

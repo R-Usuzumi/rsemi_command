@@ -41,6 +41,9 @@ mkdir -p "$simlink_dir"
 
 pip install -r requirements.txt
 
+# token用のフォルダをhome直下に作成
+mkdir -p "$HOME/rsemi_token"
+
 # シンボリックリンク貼る
 for file in ./bin/*; do
     file_name="${file##*/}"
@@ -57,7 +60,7 @@ for file in ./bin/*; do
 done
 
 
-# commentエイリアスが存在しない場合に追加
+# commentのエイリアス
 if ! grep -q "alias comment='source comment'" "$shell_config"; then
     echo "alias comment='source comment'" >> "$shell_config"
     echo "Added alias 'comment' to $shell_config."
@@ -65,7 +68,7 @@ else
     echo "Alias 'comment' is already defined in $shell_config."
 fi
 
-# materialエイリアスが存在しない場合に追加
+# materialのエイリアス
 if ! grep -q "alias material='source material'" "$shell_config"; then
     echo "alias material='source material'" >> "$shell_config"
     echo "Added alias 'material' to $shell_config."
