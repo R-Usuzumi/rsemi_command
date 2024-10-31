@@ -35,6 +35,12 @@ if grep -q "alias material='source material'" "$shell_config"; then
     echo "Removed alias 'material' from $shell_config"
 fi
 
+if grep -q 'alias google-chrome' "$shell_config"; then
+    sed -i '' '/alias google-chrome/d' "$shell_config"
+    echo "Removed alias 'google-chrome' from $shell_config"
+fi
+
+
 echo "Alias removal complete."
 
 echo "Uninstallation complete."
