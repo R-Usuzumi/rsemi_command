@@ -1,101 +1,11 @@
-* インストール方法
-** インストール手順
-   - gh repo clone R-Usuzumi/rsemi_command
-   - rsemi_commnadに移動
-   - ./install.shを実行
-     - nickname: 自分のニックネームを入力
-     - rsemi_path: 自分のpc内の2024-r-semiまでのパス
-       - ~/からのパスあるいはルートからのパスを入力
-       - *ここしくじったら何もできません!!!* (あとで再設定はできます)
-   - source ~/.zshrc
-   - インストール完了．rget以外がすぐに使えるようになります
+* できること
+  - 一撃2024-r-semiのmaterial, commentフォルダに移動
+  - google documentから指定した日付の自分の合意事項・コメントを自動取得し，comment/nickname.orgに自動出力
+  - 指定したhtmlをpdfに変換し，material/フォルダ内に出力
+  - 指定した人，日付のpdf資料を開く
+  - 資料配置後，addしてプルリク投げるまでの流れ自動化
 
-** rgetコマンドを使うためのgoogle cloudの設定
-*** 注意
-   - googleのapiを使用するためにgoogle cloud側で事前に設定するべきことを設定します
-   - この設定をしなくてもrget以外のコマンドは使えます
-   
-*** 設定手順
-**** プロジェクト作成
-   - [[https://console.cloud.google.com/welcome?_gl=1*1ndh4j4*_up*MQ..&gclid=Cj0KCQjw1Yy5BhD-ARIsAI0RbXY0XT4NyI0FjF3U4RtVXOfqwMwe1HnbrlpONSobjcUUWs5191GAWk0aArzpEALw_wcB&gclsrc=aw.ds&project=rsmi-440216][Google cloud console]] にアクセスします，おそらく 以下の画面になる（初期画面）
-      #+ATTR_HTML: :width 800
-      file:///Users/usuryuryu/rsemi_command/docs/images/d0.png     
-   - 左上の「プロジェクト選択」をクリック
-      #+ATTR_HTML: :width 800
-      file:///Users/usuryuryu/rsemi_command/docs/images/d1.png
-   - 右上の「新しいプロジェクト」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d2.png
-   - プロジェクト名を「rsemi-command」として「作成」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d3.png
-   - 作成後にrsemi-commandプロジェクトが画像のように選択されていることを確認
-     - もし選択されていない場合は，プロジェクト選択から選択
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d4.png
-     
-**** APIの有効化     
-   - 初期画面の左上のメニューバーから「APIとサービス」 > 「ライブラリ」を選択すると，下の画面になる
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d5.png
-   - 真ん中の検索バーに google docs apiと打つと以下の画面になるので，「Google Docs APi」を選択
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d6.png
-   - 「有効にする」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d7.png
-   - 同様の手順で検索バーにgoogle sheets apiと打つと以下の画面になるので，「Google Sheets API」を選択して，「有効にする」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d8.png
-     
-**** 認証情報の設定
-   - 初期画面の左上のメニューバーから「APIとサービス」 > 「OAuth同意画面」を選択すると下の画面になる
-     - User Typeとして「外部」を選んで作成をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d9.png
-   - 次に以下の画面で，アプリ名は「rsemi-command」，ユーザサポートメールは自分のgoogleのメアドを入力
-     - 下にスクロールした先にあるデベロッパーの連絡先情報にも同様に自分のメアドを入力して，「保存して次へ」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d10.png
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d11.png
-   - 以下のスコープの設定は何も設定しなくていいです. スクロールして「保存して次へ」をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d12.png
-   - 以下の画面でテストユーザーの下にある +ADD USERS をクリックして，自分のgoogleのメアドを入力して，追加をクリック. 「保存して次へ」をクリック
-     - 「不適格なアカウントは追加されません」とでても，一旦無視してください
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d13.png
-   - 初期画面に戻って左上のメニューバーから「APIとサービス」 > 「認証情報」を選択すると，以下の画面になります
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d15.png
-   - 「認証情報の作成」をクリックし，「OAuth クライアントID」を選択
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d16.png
-   - 以下の画面でアプリケーションの種類で「デスクトップアプリ」，名前を「rsemi-command」を入力し，作成をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d18.png
-   - 下の画面のようにOAuth 2.0クライアントIDに行が追加されるので，一番右のダウンロードボタンをクリックして，JSONをダウンロード
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d19.png
-
-   - ダウンロードされたclient_secret_...みたいなjson形式のファイル名を「credentials.json」に変更
-   - コマンド自体のインストールをしていたら，ホームディレクトリにrsemi_tokenというフォルダが作成されるので，credentials.jsonをそこに移動
-   - ターミナルで以下のコマンドを実行するとブラウザが立ち上がり，googleアカウント選択の後以下の画面が出てくる. 続行をクリック
-     - ここで違うの出てきたら，どこかでミスしています
-     #+BEGIN_SRC shell
-     rget 2024/10/15 --pos copy
-     #+END_SRC
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d20.png
-   - 以下の画面のようにすべてを選択して，続行をクリック
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d21.png
-   - ターミナルに戻って，以下のようにターミナル上に合意事項やコメントが出ていたら，成功です
-     #+ATTR_HTML: :width 800
-     file:///Users/usuryuryu/rsemi_command/docs/images/d22.png
-     
-* コマンド
+* 使用できるコマンド
 ** *material*
  - 概要
    - 2024-r-semiのmaterialフォルダに移動
@@ -144,7 +54,7 @@
         
 ** *rout*
  - 概要
-   - 指定したhtmlをpdfに変換し，material/フォルダ内に出力
+   - 指定したhtmlをpdfに変換し，material/フォルダ内に出力. htmlのbasenameがpdf名になる
 
  - 引数
    1. <html_file> (必須)
@@ -230,7 +140,104 @@
      - config変数をキー・値の形で再設定できます
    #+BEGIN_SRC shell
      rconfig set NICKNAME ryuto
-   #+END_SRC            
+   #+END_SRC  
+
+* インストール方法
+** インストール手順
+   - gh repo clone R-Usuzumi/rsemi_command
+   - rsemi_commnadに移動
+   - ./install.shを実行
+     - nickname: 自分のニックネームを入力
+     - rsemi_path: 自分のpc内の2024-r-semiまでのパス
+       - ~/からのパスあるいはルートからのパスを入力
+       - *ここしくじったら何もできません!!!* (あとで再設定はできます)
+   - source ~/.zshrc
+   - インストール完了．rget以外がすぐに使えるようになります
+
+** rgetコマンドを使うためのgoogle cloudの設定
+*** 注意
+   - googleのapiを使用するためにgoogle cloud側で事前に設定するべきことを設定します
+   - この設定をしなくてもrget以外のコマンドは使えます
+   
+*** 設定手順
+**** プロジェクト作成
+   - [[https://console.cloud.google.com/welcome?_gl=1*1ndh4j4*_up*MQ..&gclid=Cj0KCQjw1Yy5BhD-ARIsAI0RbXY0XT4NyI0FjF3U4RtVXOfqwMwe1HnbrlpONSobjcUUWs5191GAWk0aArzpEALw_wcB&gclsrc=aw.ds&project=rsmi-440216][Google cloud console]] にアクセスします，おそらく 以下の画面になる（初期画面）
+      #+ATTR_HTML: :width 800
+      [[./images/d0.png]]
+   - 左上の「プロジェクト選択」をクリック
+      #+ATTR_HTML: :width 800
+      [[./images/d1.png]]
+   - 右上の「新しいプロジェクト」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d2.png]]
+   - プロジェクト名を「rsemi-command」として「作成」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d3.png]]
+   - 作成後にrsemi-commandプロジェクトが画像のように選択されていることを確認
+     - もし選択されていない場合は，プロジェクト選択から選択
+     #+ATTR_HTML: :width 800
+     [[./images/d4.png]]
+     
+**** APIの有効化     
+   - 初期画面の左上のメニューバーから「APIとサービス」 > 「ライブラリ」を選択すると，下の画面になる
+     #+ATTR_HTML: :width 800
+     [[./images/d5.png]]
+   - 真ん中の検索バーに google docs apiと打つと以下の画面になるので，「Google Docs APi」を選択
+     #+ATTR_HTML: :width 800
+     [[./images/d6.png]]
+   - 「有効にする」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d7.png]]
+   - 同様の手順で検索バーにgoogle sheets apiと打つと以下の画面になるので，「Google Sheets API」を選択して，「有効にする」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d8.png]]
+     
+**** 認証情報の設定
+   - 初期画面の左上のメニューバーから「APIとサービス」 > 「OAuth同意画面」を選択すると下の画面になる
+     - User Typeとして「外部」を選んで作成をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d9.png]]
+   - 次に以下の画面で，アプリ名は「rsemi-command」，ユーザサポートメールは自分のgoogleのメアドを入力
+     - 下にスクロールした先にあるデベロッパーの連絡先情報にも同様に自分のメアドを入力して，「保存して次へ」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d10.png]]
+     #+ATTR_HTML: :width 800
+     [[./images/d11.png]]
+   - 以下のスコープの設定は何も設定しなくていいです. スクロールして「保存して次へ」をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d12.png]]
+   - 以下の画面でテストユーザーの下にある +ADD USERS をクリックして，自分のgoogleのメアドを入力して，追加をクリック. 「保存して次へ」をクリック
+     - 「不適格なアカウントは追加されません」とでても，一旦無視してください
+     #+ATTR_HTML: :width 800
+     [[./images/d13.png]]
+   - 初期画面に戻って左上のメニューバーから「APIとサービス」 > 「認証情報」を選択すると，以下の画面になります
+     #+ATTR_HTML: :width 800
+     [[./images/d15.png]]
+   - 「認証情報の作成」をクリックし，「OAuth クライアントID」を選択
+     #+ATTR_HTML: :width 800
+     [[./images/d16.png]]
+   - 以下の画面でアプリケーションの種類で「デスクトップアプリ」，名前を「rsemi-command」を入力し，作成をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d18.png]]
+   - 下の画面のようにOAuth 2.0クライアントIDに行が追加されるので，一番右のダウンロードボタンをクリックして，JSONをダウンロード
+     #+ATTR_HTML: :width 800
+     [[./images/d19.png]]
+
+   - ダウンロードされたclient_secret_...みたいなjson形式のファイル名を「credentials.json」に変更
+   - コマンド自体のインストールをしていたら，ホームディレクトリにrsemi_tokenというフォルダが作成されるので，credentials.jsonをそこに移動
+   - ターミナルで以下のコマンドを実行するとブラウザが立ち上がり，googleアカウント選択の後以下の画面が出てくる. 続行をクリック
+     - ここで違うの出てきたら，どこかでミスしています
+     #+BEGIN_SRC shell
+     rget 2024/10/15 --pos copy
+     #+END_SRC
+     #+ATTR_HTML: :width 800
+     [[./images/d20.png]]
+   - 以下の画面のようにすべてを選択して，続行をクリック
+     #+ATTR_HTML: :width 800
+     [[./images/d21.png]]
+   - ターミナルに戻って，以下のようにターミナル上に合意事項やコメントが出ていたら，成功です
+     #+ATTR_HTML: :width 800
+     [[./images/d22.png]]          
 
 * アンインストール方法
  - ./uninstall.sh実行
