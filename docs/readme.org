@@ -27,14 +27,13 @@
  - 引数
    1. <date> (必須)
       - 日付YYYY/MM/DD
-	
    2. <--pos> (オプション)
       - top
-	- comment/nickname.orgの一番上に追記
+        - comment/nickname.orgの一番上に追記
       - bottom
-	- comment/nickname.orgの一番下に追記
+        - comment/nickname.orgの一番下に追記
       - copy
-	- クリップボードにコピー		
+        - クリップボードにコピー		
 
  - 使用例
    - comment/nickname.orgの一番上に追記したい場合
