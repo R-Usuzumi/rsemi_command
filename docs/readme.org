@@ -53,16 +53,25 @@
         
 ** *rout*
  - 概要
-   - 指定したhtmlをpdfに変換し，material/フォルダ内に出力. htmlのbasenameがpdf名になる
+   - 指定したhtmlをpdfに変換し，material/フォルダ内に出力. 
 
  - 引数
    1. <html_file> (必須)
-      - orgから出力したhtmlファイルを指定
+      - orgから出力したhtmlファイルを指定．htmlのbasenameがpdf名になる
+   2. <--name> (オプション)
+      - pdfファイル名
+        - 出力するpdfのファイル名を指定して出力できる（拡張子なしで指定）
 
  - 使用例
+   - オプションなし
    #+BEGIN_SRC shell
      rout 1029-ryuto.html
    #+END_SRC   
+   - オプションあり
+     - 拡張子抜きで指定してください．下の例だとaaa.pdfとして出力されます
+   #+BEGIN_SRC shell
+     rout 1029-ryuto.html --name aaa
+   #+END_SRC 
 
 ** *ropen*
  - 概要
