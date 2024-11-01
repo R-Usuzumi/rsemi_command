@@ -110,18 +110,15 @@
    - インストール時のconfig変数(NICKNAMEとRSEMI_PATH)の設定変更や確認ができます
 
  - 引数
-   1. <show> (必須)
-      
+   1. <show> (必須)      
    1. <get> (必須)
-      2. <key> (必須)
-	 - config変数のキー (NICKNAME, RSEMI_PATH)
-	 
+     2. <key> (必須)
+       - config変数のキー (NICKNAME, RSEMI_PATH)	 
    1. <set> (必須)
-      2. <key> (必須)
-	 - config変数のキー 
-      3. <value> (必須)
-	 - config変数のキーに対応する値
-	   
+     2. <key> (必須)
+       - config変数のキー 
+     3. <value> (必須)
+       - config変数のキーに対応する値	   
  - 使用例
    - showする場合
      - config変数(NICKNAMEとRSEMI_PATH)の値を確認できます
