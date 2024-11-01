@@ -39,7 +39,7 @@ fi
 simlink_dir="$HOME/bin"
 mkdir -p "$simlink_dir"
 
-pip install -r requirements.txt
+pip install -r requirements.txt > /dev/null
 
 # token用のフォルダをhome直下に作成
 mkdir -p "$HOME/rsemi_token"
