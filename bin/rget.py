@@ -126,7 +126,7 @@ def get_document_id(url):
     if match:
         return match.group(1)
     else:
-        raise ValueError("Document ID not found in the URL.")
+        raise ValueError("Document not found")
 
 
 def search_agree_comment(doc_id, nickname):

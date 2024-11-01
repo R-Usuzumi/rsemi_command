@@ -22,6 +22,12 @@ fi
 if [ $# -eq 1 ]; then
     nickname="$1"
     target_file="$material_path/$(ls $material_path/ | grep -E "^[0-9]{4}-$nickname.pdf" | sort -r | head -n 1)"
+    
+    if [[ ! -f "$target_file" ]]; then
+	echo "Error: No one has that nickname."
+	exit 1
+    fi
+    
     echo "open ${target_file##*/}"
     open "$target_file"
     exit 0

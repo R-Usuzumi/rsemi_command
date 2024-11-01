@@ -5,7 +5,14 @@ config_file="$HOME/.rsemi_config"
 # 設定値の取得
 function get_config() {
     key=$1
-    grep -E "^export $key=" "$config_file" | cut -d'=' -f2-
+    value=$(grep -E "^export $key=" "$config_file" | cut -d'=' -f2-)
+
+    
+    if [ -z "$value" ]; then
+        echo "Error: Key '$key' not found"
+        exit 1
+    fi
+    echo "$value"
 }
 
 # 設定値の表示
@@ -18,6 +25,11 @@ function show_config() {
 function set_config() {
     key=$1
     value=$2
+    
+    if ! grep -q "^export $key=" "$config_file"; then
+        echo "Error: Key '$key' does not exist"
+        exit 1
+    fi
 
     sed -i '' "/^export $key=/d" "$config_file"
     echo "export $key=\"$value\"" >> "$config_file"

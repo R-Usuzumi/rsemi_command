@@ -34,6 +34,12 @@ if [[ -z "$html_file" || ("$html_file" != *.html && "$html_file" != *.htm) ]]; t
     exit 1
 fi
 
+# HTMLファイルの存在確認
+if [[ ! -f "$html_file" ]]; then
+    echo "Error: $html_file not found."
+    exit 1
+fi
+
 # 出力ファイル名の設定
 file_name="${html_file##*/}" 
 base_name="${file_name%.*}"
