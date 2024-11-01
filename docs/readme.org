@@ -244,6 +244,9 @@
      #+ATTR_HTML: :width 800
      [[./images/d22.png]]          
 
+* アップデート方法
+ - ./update.sh実行
+ - source ~/.zshrc
 * アンインストール方法
  - ./uninstall.sh実行
  - source ~/.zshrc
