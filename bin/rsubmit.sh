@@ -31,7 +31,7 @@ done
 echo
 
 # 変更されたファイルと追加されたファイルの数をチェック
-if [[ ${#tracked_files[@]} -ne 1 && ${#untracked_files[@]} -ne 1 ]]; then
+if [[ ${#tracked_files[@]} -ne 1 || ${#untracked_files[@]} -ne 1 ]]; then
     echo "comment.orgの変更とpdf資料の追加のみ行ってください"
     exit 1
 fi
