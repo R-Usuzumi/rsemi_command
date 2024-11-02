@@ -149,14 +149,22 @@
 
 * インストール方法
 ** インストール手順
-   - gh repo clone R-Usuzumi/rsemi_command
-   - rsemi_commnadに移動
-   - ./install.shを実行
+   - 任意の場所でクローン
+   #+BEGIN_SRC shell
+     gh repo clone R-Usuzumi/rsemi_command
+   #+END_SRC
+   - rsemi_commnadフォルダ内に移動して，以下を実行
      - nickname: 自分のニックネームを入力
      - rsemi_path: 自分のpc内の2024-r-semiまでのパス
        - ~/からのパスあるいはルートからのパスを入力
        - *ここしくじったら何もできません!!!* (あとで再設定はできます)
-   - source ~/.zshrc
+   #+BEGIN_SRC shell
+     ./install.sh
+   #+END_SRC
+   - シェルを再読み込み
+   #+BEGIN_SRC shell
+     source ~/.zshrc
+   #+END_SRC
    - インストール完了．rget以外がすぐに使えるようになります
 
 ** rgetコマンドを使うためのgoogle cloudの設定
@@ -246,8 +254,22 @@
 
 * アップデート方法
  - ./update.sh実行
- - source ~/.zshrc
+ #+BEGIN_SRC shell
+   ./update.sh
+ #+END_SRC
+ - シェルを再読み込み
+ #+BEGIN_SRC shell
+   source ~/.zshrc
+ #+END_SRC
+ - アップデート完了
+
 * アンインストール方法
  - ./uninstall.sh実行
- - source ~/.zshrc
+ #+BEGIN_SRC shell
+   ./uninstall.sh
+ #+END_SRC
+ - シェルを再読み込み
+ #+BEGIN_SRC shell
+   source ~/.zshrc
+ #+END_SRC
  - アンインストール完了
