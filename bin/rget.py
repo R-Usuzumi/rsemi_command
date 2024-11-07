@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import sys
 import pickle
 import re
 import argparse
@@ -10,6 +11,7 @@ from datetime import datetime
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 
 
 def load_local_env(config_path):
@@ -56,11 +58,21 @@ def get_credentials():
     # トークンが無効ならば再認証
     if not creds or not creds.valid:
 
-        # アクセストークンは期限切れだが，リフレッシュトークンあるならリフレッシュ場合
+        # accessがなく，refreshがある
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            try:
+                # refreshしてみる
+                creds.refresh(Request())
 
-        # リフレッシュトークンも無効，存在しない場合
+            except RefreshError:
+                # refresh_tokenが無効なら取りに行く
+                flow = InstalledAppFlow.from_client_secrets_file(
+                    credentials, SCOPES)
+                creds = flow.run_local_server(port=0)
+                with open(TOKEN_PATH, 'wb') as token:
+                    pickle.dump(creds, token)
+
+        # そもそもtokenがないもしくはrefresh_tokenない
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 credentials, SCOPES)
