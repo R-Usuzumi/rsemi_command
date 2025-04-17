@@ -17,8 +17,11 @@ function get_config() {
 
 # 設定値の表示
 function show_config() {
-    echo "Nickname: $(get_config NICKNAME)"
     echo "RSEMI_PATH: $(get_config RSEMI_PATH)"
+    echo "NICKNAME: $(get_config NICKNAME)"    
+    echo "SHEET_URL: $(get_config SHEET_URL)"
+    echo "SHEET_NAME: $(get_config SHEET_NAME)"
+    echo "COMMENTFILE_PATH: $(get_config COMMENTFILE_PATH)"
 }
 
 # 設定値の設定

@@ -15,11 +15,15 @@ if [ -f "$config_file" ]; then
 else   
     read "nickname?nickname: "
     read "rsemi_path?rsemi_path: "
+    read "sheet_url?sheet_url:  "
+    read "sheet_name?sheet_name:  "
     rsemi_path="$HOME/${rsemi_path#*/}"
 
     echo "You entered:"
     echo "nickname: $nickname"
     echo "rsemi_path: $rsemi_path"
+    echo "sheet_url: $sheet_url"
+    echo "sheet_name: $sheet_name"
     read "confirm? Is this correct? (y/n): "
     if [[ "$confirm" != "y" ]]; then
 	echo "Installation aborted."
@@ -27,8 +31,11 @@ else
     fi   
 
     cat <<EOL > "$config_file"
-export NICKNAME="$nickname"
-export RSEMI_PATH="$rsemi_path"
+export NICKNAME=$nickname
+export RSEMI_PATH=$rsemi_path
+export COMMENTFILE_PATH=$rsemi_path/comment/$nickname.org
+export SHEET_URL=$sheet_url
+export SHEET_NAME=$sheet_name
 EOL
     
     echo "Configuration file created at $config_file"
